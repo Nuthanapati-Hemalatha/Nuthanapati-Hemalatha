@@ -1,0 +1,795 @@
+Variables: Containers for storing data
+	Syntax: data_type variable_name;
+Variables must be declared before they are used.
+
+Data types: Data types define what kind of data, which can be broadly categorized into
+Basic Data Types:
+-> int: Used to store integer values. The size is typically 4 bytes.
+			Ex: int networkSpeed = 100; 
+
+-> short: Typically smaller than int, used to store smaller integer values. Often 2 bytes.
+			Ex: short maxChannels = 256;
+-> long: Used to store larger integer values. Typically 8 bytes on modern systems.
+			Ex: long networkTraffic = 1234567890; 
+
+-> long long: Guaranteed to be at least 64 bits in size, used for even larger integers.
+			Ex: long long totalDataTransmitted = 9876543210; 
+
+-> float: Used to store single-precision floating-point numbers. Typically 4 bytes.
+			Ex: float signalStrength = 76.5f; 
+
+-> double: Used to store double-precision floating-point numbers. Typically 8 bytes.
+		Ex: double latency = 25.75;
+
+-> long double: Used for extended precision floating-point numbers, usually 12 or 16 bytes.
+		Ex: long double preciseMeasurement = 0.000000123456789L; 
+
+-> char: Used to store single characters. Typically 1 byte.
+		Ex: char protocol = 'L’; 
+
+-> bool: Used to store boolean values (true or false).
+		Ex: bool isConnectionActive = true;
+
+-> unsigned: Indicates that a variable can only hold non-negative values.
+		Ex: unsigned int packetCount = 1000;
+
+-> signed: Indicates that a variable can hold both positive and negative values (default for int).
+		Ex: signed int errorCount = -10; 
+
+Derived Data Types :
+-> array: A collection of elements of the same data type.
+Example: int numbers[5] = {1, 2, 3, 4, 5};
+
+-> Function: A function is a block of code that performs a specific task. 
+Example: return_type function_name(parameters) {
+	      // body of the function 
+	      }
+
+-> Pointers: A pointer is a variable that stores the memory address of another variable.
+Use the address-of operator (&) to get the memory address.
+Use the dereference operator (*) to access the value stored at the address.
+Example: #include <iostream>
+using namespace std;
+int main() {
+    int num = 10;
+    int *ptr = &num;  // Pointer stores the address of num
+    cout << "Address: " << ptr << endl;
+    cout << "Value: " << *ptr << endl;  // Dereferences the pointer
+    return 0;
+}
+
+-> Reference: A reference is an alias for an existing variable.
+Use the & symbol to declare a reference.
+#include <iostream>
+using namespace std;
+int main() {
+    int num = 20;
+    int &ref = num;  // ref is a reference to num
+    cout << "Value (ref): " << ref << endl;
+    ref = 30;  // Modifies num through ref
+    cout << "Value (num): " << num << endl;
+    return 0;
+}
+
+User-defined datatypes:
+-> Structure (struct): A structure groups multiple variables of different types into a single unit.
+struct Person {
+    string name;
+    int age;
+};
+Use the dot operator (.) for direct access.
+Use the arrow operator (->) if accessing through a pointer.
+#include <iostream>
+using namespace std;
+struct Person {
+    string name;
+    int age;
+};
+
+int main() {
+    Person p = {"Alice", 25};
+    cout << "Name: " << p.name << ", Age: " << p.age << endl;
+
+    Person *ptr = &p;
+    cout << "Access via pointer: " << ptr->name <<ptr->age<< endl;
+    return 0;
+}
+
+-> Union: A union is similar to a structure but with one key difference: all members share the same memory space.
+#include <iostream>
+using namespace std;
+union Data {
+    int intVal;
+    float floatVal;
+};
+
+int main() {
+    Data d;
+    d.intVal = 10;
+    cout << "Integer value: " << d.intVal << endl;
+
+    d.floatVal = 3.14;  // Overwrites intVal
+    cout << "Float value: " << d.floatVal << endl;
+    return 0;
+}
+Note : unions are used in Situations where memory is limited, and only one member is needed at a time.
+
+->Enumeration (enum) : An enumeration is a user-defined type consisting of named integer constants.
+when you have a list of related options or values, and you want to give them meaningful names instead of just using numbers.
+enum Color { RED, GREEN, BLUE };
+// RED = 0, GREEN = 1, BLUE = 2 (default values)
+enum Days { MON = 1, TUE, WED };  
+// MON = 1, TUE = 2, WED = 3 (custom starting value)
+#include <iostream>
+using namespace std;
+enum Color { RED, GREEN, BLUE };
+
+int main() {
+    Color c = RED;
+    cout << "Value of RED: " << c << endl;  // Output: 0
+
+    c = BLUE;
+    cout << "Value of BLUE: " << c << endl;  // Output: 2
+    return 0;
+}
+
+-> typedef : is used to create aliases for data types.
+syntax : typedef existing_type new_name;
+#include <iostream>
+using namespace std;
+// Create an alias for unsigned int
+typedef unsigned int uint;
+
+int main() {
+    uint age = 25;  // Equivalent to: unsigned int age = 25;
+    cout << "Age: " << age << endl;
+    return 0;
+}
+
+
+
+Operators
+Operators are symbols used to perform operations. Types include:
+
+Arithmetic Operators: +, -, *, /, %
+Relational Operators: ==, !=, <, >, <=, >=
+Logical Operators: && (AND), || (OR), ! (NOT)
+Bitwise Operators: &, |, ^, ~, <<, >>
+Assignment Operators: =, +=, -=, *=, /=, %=
+Increment/Decrement Operators: ++, --
+Ternary Operator: ? :
+
+-> Arithmetic Operators : 
+#include <iostream>
+using namespace std;
+int main() {
+    int a = 10, b = 3;
+    cout << "Addition: " << a + b << endl;
+    cout << "Subtraction: " << a - b << endl;
+    cout << "Multiplication: " << a * b << endl;
+    cout << "Division: " << a / b << endl;  // Integer division
+    cout << "Modulus: " << a % b << endl;
+    return 0;
+}
+
+-> Relational Operators :
+#include <iostream>
+using namespace std;
+int main(  ) {
+    int x = 5, y = 10;
+    cout << (x == y) << endl;  // false (0)
+    cout << (x != y) << endl;  // true (1)
+    cout << (x < y) << endl;   // true (1)
+    cout << (x > y) << endl;   // false (0)
+    cout << (x <= y) << endl;  // true (1)
+    cout << (x >= y) << endl;  // false (0)
+    return 0;
+}
+
+-> Logical Operators :
+#include <iostream>
+using namespace std;
+int main() {
+    bool a = true, b = false;
+    cout << (a && b) << endl;  // false (0)
+    cout << (a || b) << endl;  // true (1)
+    cout << (!a) << endl;      // false (0)
+    return 0;
+}
+
+-> Bitwise Operators : 
+#include <iostream>
+using namespace std;
+int main() {
+    int a = 5, b = 3;  // Binary: 5 = 0101, 3 = 0011
+    cout << (a & b) << endl;  // AND: 0001 -> 1
+    cout << (a | b) << endl;  // OR:  0111 -> 7
+    cout << (a ^ b) << endl;  // XOR: 0110 -> 6
+    cout << (~a) << endl;     // NOT: 1010 -> -6 (2's complement)
+    cout << (a << 1) << endl; // Left shift: 1010 -> 10
+    cout << (a >> 1) << endl; // Right shift: 0010 -> 2
+    return 0;
+}
+
+-> Assignment Operators : 
+#include <iostream>
+using namespace std;
+int main() {
+    int a = 10;
+    a += 5;   // a = a + 5
+    cout << "After += : " << a << endl;
+    a -= 3;   // a = a - 3
+    cout << "After -= : " << a << endl;
+    a *= 2;   // a = a * 2
+    cout << "After *= : " << a << endl;
+    a /= 4;   // a = a / 4
+    cout << "After /= : " << a << endl;
+    a %= 3;   // a = a % 3
+    cout << "After %= : " << a << endl;
+    return 0;
+}
+
+-> Increment/Decrement Operators : 
+#include <iostream>
+using namespace std;
+int main() {
+    int x = 5;
+    cout << "Initial value: " << x << endl;
+
+    cout << "Post-increment: " << x++ << endl;  // Outputs 5, then increments to 6
+    cout << "After post-increment: " << x << endl;
+
+    cout << "Pre-increment: " << ++x << endl;  // Increments to 7, then outputs 7
+
+    cout << "Post-decrement: " << x-- << endl;  // Outputs 7, then decrements to 6
+    cout << "After post-decrement: " << x << endl;
+
+    cout << "Pre-decrement: " << --x << endl;  // Decrements to 5, then outputs 5
+    return 0;
+}
+
+-> Ternary Operator : 
+#include <iostream>
+using namespace std;
+int main() {
+    int a = 10, b = 20;
+    int max = (a > b) ? a : b;  // If a > b, max = a; otherwise, max = b
+    cout << "Maximum: " << max << endl;
+    return 0;
+}
+
+
+Input and Output in C++ : 
+C++ uses streams to handle input and output operations. A stream is a flow of data. In simple terms:
+-> Input is the flow of data from a device (like a keyboard) into the program.
+-> Output is the flow of data from the program to a device (like a screen).
+
+Input (cin):
+cin stands for "console input."
+It is used to take input from the user.
+The extraction operator (>>) is used to extract data from the input stream.
+
+Output (cout):
+cout stands for "console output."
+It is used to display output to the user.
+The insertion operator (<<) is used to insert data into the output stream.
+
+#include <iostream> // Required for cin and cout
+using namespace std;
+int main() {
+    int num;                      // Declare an integer variable to store the input
+    cout << "Enter a number: ";   // Output message prompting the user for input
+    cin >> num;                   // Accept input from the user and store it in 'num'
+    cout << "You entered: " << num << endl; // Display the input back to the user
+    return 0;
+}
+
+Input with Multiple Variables:
+int a, b;
+cin >> a >> b; // Enter: 10 20
+
+Note : cin skips whitespaces like spaces, tabs, or newlines by default.
+For string inputs containing spaces, use getline instead of cin.
+string name;
+cout << "Enter your full name: ";
+getline(cin, name); // Reads the entire line, including spaces
+
+Buffer Flushing: Sometimes, leftover characters (like \n) in the input buffer can cause unexpected behavior. To clear the buffer:
+cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+Flow Control : 
+Flow control structures are used to make decisions and execute code blocks conditionally or repeatedly.
+Conditional Statements : 
+Conditional statements are used to make decisions in a program.
+Types of Conditional Statements in C++
+-> if statement
+-> if-else statement
+-> if-else-if ladder
+-> nested if statement
+-> switch statement
+
+if Statement: The if statement executes a block of code only if a specific condition is true.
+Syntax
+if (condition) 
+{    // Code to execute
+}
+
+If else: If the condition is true, one block of code is executed; if the condition is false, the other block is executed.
+Syntax:
+if (condition) 
+{    // Code to execute if condition is true
+} else 
+{    // Code to execute if condition is false
+}
+
+If else if ladder: The if-else-if ladder is used when there are multiple conditions to be checked.
+Syntax: 
+if (condition1) 
+{    // Code to execute if condition1 is true} 
+else if (condition2) 
+{    // Code to execute if condition2 is true} 
+else if (condition3) 
+{    // Code to execute if condition3 is true} 
+else {    // Code to execute if all conditions are false
+}
+
+Nested if: if statement inside another if statement.
+Syntax:
+if (condition1) 
+{    // Code to execute if condition1 is true    
+if (condition2) 
+{        // Code to execute if condition2 is also true    
+}}
+
+SwitchStatement: A switch statement in C++ allows you to execute different blocks of code based on the value of a variable or expression.
+Syntax:
+switch (expression) {    
+case value1:        // Code to execute if expression == value1       
+ break;    
+case value2:        // Code to execute if expression == value2        
+break;   
+ ...    
+default:        // Code to execute if no cases match
+}
+
+Loops:Loops in C++ are used to execute a block of code repeatedly.
+Types of Loops in C++
+-> for loop
+-> while loop
+-> do-while loop
+
+For loop: A for loop is used when the number of iterations is known beforehand.
+Syntax:
+for (initialization; condition; increment) 
+{    // Code to be executed in each iteration}
+
+While loop: A while loop is used when the number of iterations is not known in advance
+while (condition) 
+{    // Code to be executed while condition is true}
+
+Do while: the condition is checked after the code block is executed.
+do 
+{    // Code to be executed
+} while (condition);
+
+
+Memory Management in C++ :
+Memory management in C++ allows you to allocate and deallocate memory dynamically during program execution. This provides greater flexibility but also requires careful handling to avoid memory leaks or undefined behavior.
+Dynamic Memory Management : 
+Dynamic memory management allows you to allocate memory during runtime. The new and delete operators are used for this purpose.
+
+new Operator:
+Allocates memory from the heap for a specified type.
+Returns a pointer to the allocated memory.
+int *ptr = new int;  // Allocates memory for one integer
+*ptr = 10;           // Assigns value 10 to the allocated memory
+
+delete Operator:
+Frees memory that was allocated with new.
+Prevents memory leaks by returning the memory to the system.
+delete ptr;  // Frees the allocated memory
+ptr = nullptr;  // Best practice: Set pointer to nullptr after deletion
+
+Dynamic Allocation for Arrays : 
+int *arr = new int[5];  // Allocates memory for an array of 5 integers
+for (int i = 0; i < 5; i++) {
+    arr[i] = i + 1;  // Assign values
+}
+for (int i = 0; i < 5; i++) {
+    cout << arr[i] << " ";  // Output: 1 2 3 4 5
+}
+delete[] arr;  // Free memory for the array
+arr = nullptr;
+Note : When the size of an array is unknown during compile time, dynamic allocation provides flexibility.
+
+Common Issues with Manual Memory Management :
+-> Forgetting to free allocated memory results in memory leaks, which can exhaust the available memory.
+-> Dangling Pointers: Accessing memory after it has been freed.Prevent by setting the pointer to nullptr after delete.
+-> Deleting the same pointer twice causes undefined behavior.
+
+Smart Pointers : 
+C++11 introduced smart pointers to automate memory management and eliminate many issues with manual memory handling.
+Types of Smart Pointers:
+
+-> unique_ptr:
+Owns the resource exclusively.
+Ensures that only one unique_ptr can manage a resource at a time.
+Automatically deletes the resource when it goes out of scope.
+#include <iostream>
+#include <memory>  // Required for smart pointers
+using namespace std;
+int main() {
+    unique_ptr<int> ptr(new int(10));  // Create a unique_ptr
+    cout << *ptr << endl;  // Output: 10
+    // No need to call delete; resource is freed automatically
+    return 0;
+}
+
+-> shared_ptr:
+Allows multiple shared_ptr instances to share ownership of the same resource.
+Keeps a reference count to determine when to delete the resource.
+#include <iostream>
+#include <memory>
+using namespace std;
+int main() {
+    shared_ptr<int> ptr1 = make_shared<int>(20);  // Create shared_ptr
+    shared_ptr<int> ptr2 = ptr1;  // ptr2 also owns the resource
+    cout << *ptr1 << " " << *ptr2 << endl;  // Output: 20 20
+    return 0;
+}
+
+Best Practices :
+-> Use unique_ptr and shared_ptr for better memory safety.
+-> Use raw pointers (new/delete) only when absolutely necessary.
+-> Always delete dynamically allocated memory, or use smart pointers to handle it automatically.
+-> Initialize pointers to nullptr to avoid accessing uninitialized memory.
+
+
+->Storage classes in C++ define four key characteristics of a variable:
+Scope: Where in the program the variable can be accessed.
+Lifetime: How long the variable exists in memory.
+Visibility: Where the variable can be seen or used in the program.
+Default Value: The initial value of the variable if not explicitly initialized.
+
+->Automatic (auto)
+Default Storage Class: Used for local variables declared inside a function or block.
+Scope: Limited to the block or function where the variable is declared.
+Lifetime: Exists only while the function or block is executing. Memory is released once the function exits.
+Default Value: Garbage (uninitialized values).
+#include <iostream>
+using namespace std;
+void display() {
+    int x = 10; // auto by default
+    cout << "x inside display(): " << x << endl;
+}
+
+int main() {
+    display();
+    // x is not accessible here
+    return 0;
+}
+Note : Variables declared inside functions without any storage class are auto by default.
+
+-> Static (static)
+Purpose: Retains its value between function calls and is initialized only once.
+Scope: Local to the function or block where it is defined but retains its value across multiple calls.
+Lifetime: Lasts for the entire duration of the program.
+Default Value: Zero for integers and nullptr for pointers.
+#include <iostream>
+using namespace std;
+void counter() {
+    static int count = 0; // Retains value between calls
+    count++;
+    cout << "Count: " << count << endl;
+}
+
+int main() {
+    counter(); // Output: Count: 1
+    counter(); // Output: Count: 2
+    counter(); // Output: Count: 3
+    return 0;
+}
+
+Extern (extern)
+Purpose: Used to declare global variables that are shared across multiple files.
+Scope: Global but declared externally.
+Lifetime: Exists for the entire duration of the program.
+Default Value: Zero for integers and nullptr for pointers.
+Usage:
+Define a global variable in one file.
+Declare it in other files using extern.
+
+File 1 (file1.cpp):
+#include <iostream>
+using namespace std;
+int globalVar = 10; // Definition of the global variable
+
+File 2 (file2.cpp):
+#include <iostream>
+using namespace std;
+extern int globalVar; // Declaration of the global variable
+int main() {
+    cout << "Global variable: " << globalVar << endl;
+    return 0;
+}
+Note : The extern keyword tells the compiler that the variable is defined in another file.It helps to share global variables without redefining them.
+
+-> Register (register)
+Purpose: Suggests to the compiler to store the variable in a CPU register for faster access (instead of RAM).
+Scope: Limited to the block or function where it is declared.
+Lifetime: Exists only during the execution of the function or block.
+Default Value: Garbage (uninitialized values).
+#include <iostream>
+using namespace std;
+void fastOperation() {
+    register int counter = 0; // Stored in a register (if possible)
+    for (counter = 0; counter < 10; counter++) {
+        cout << counter << " ";
+    }
+    cout << endl;
+}
+int main() {
+    fastOperation();
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
